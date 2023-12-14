@@ -101,8 +101,7 @@ export async function getRecommendedRows(
 ): Promise<Gpts[]> {
   const res =
     // await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
-    await sql`SELECT * FROM gpts WHERE AND id > ${last_id} ORDER BY id DESC LIMIT ${limit}`;
-
+    await sql`SELECT * FROM gpts WHERE id > ${last_id} ORDER BY id DESC LIMIT ${limit}`;
   return getGptsFromSqlResult(res);
 }
 
@@ -136,9 +135,8 @@ export async function findByUuid(uuid: string): Promise<Gpts | undefined> {
 
   const { rows } = res;
   const row = rows[0];
-  const gpts = formatGpts(row);
 
-  return gpts;
+  return formatGpts(row);
 }
 
 function getGptsFromSqlResult(res: QueryResult<QueryResultRow>): Gpts[] {
