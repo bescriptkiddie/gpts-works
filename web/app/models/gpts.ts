@@ -100,7 +100,8 @@ export async function getRecommendedRows(
   limit: number
 ): Promise<Gpts[]> {
   const res =
-    await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
+    // await sql`SELECT * FROM gpts WHERE is_recommended=true AND id > ${last_id} ORDER BY sort DESC LIMIT ${limit}`;
+    await sql`SELECT * FROM gpts WHERE AND id > ${last_id} ORDER BY id DESC LIMIT ${limit}`;
 
   return getGptsFromSqlResult(res);
 }
